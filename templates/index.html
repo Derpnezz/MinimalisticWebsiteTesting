@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id="home" class="hero-section vh-100 d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 mb-4 fade-in">Embrace Minimalism</h1>
+                <p class="lead mb-4 fade-in-delay">Clean design for modern solutions</p>
+                <a href="#about" class="btn btn-outline-secondary fade-in-delay-2">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1691600351222-09b297d09e38" alt="Minimal aesthetic" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="mb-4">About Us</h2>
+                <p class="lead">We believe in the power of simplicity. Our approach combines minimalist design with functional excellence.</p>
+                <p>Through careful attention to detail and thoughtful design choices, we create experiences that resonate with modern sensibilities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <h2 class="text-center mb-4">Get in Touch</h2>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <form method="POST" action="{{ url_for('contact') }}">
+                    {{ form.csrf_token }}
+                    <div class="mb-3">
+                        {{ form.name.label(class="form-label") }}
+                        {{ form.name(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.email.label(class="form-label") }}
+                        {{ form.email(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.message.label(class="form-label") }}
+                        {{ form.message(class="form-control", rows="5") }}
+                    </div>
+                    <button type="submit" class="btn btn-secondary w-100">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
